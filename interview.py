@@ -64,7 +64,7 @@ st.title("Interview Simulator")
 st.markdown("""This is a tool to practice interviews. Every time you run it, the questions will be similar, 
   but different. It will ask five questions, then ask if you have any questions. Think seriously 
   how you would answer each question in a real interview, and the simulator will give feedback for each answer.
-  The simulator will be very nice, so don't expect every interview to be so pleasant. Run it multiple times
+  The simulator will be very nice, so don't actual interviews to be so pleasant. :) Run it multiple times
   to practice different types of questions.
   """)
 
