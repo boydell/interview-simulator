@@ -63,8 +63,10 @@ def chat_click():
 st.title("Interview Simulator")
 st.markdown("""This is a tool to practice interviews. Every time you run it, the questions will be similar, 
   but different. It will ask five questions, then ask if you have any questions. Think seriously 
-  how you would answer the questions in a real interview, and the simulator will give you a little
-  bit of feedback for each answer.""")
+  how you would answer each question in a real interview, and the simulator will give feedback for each answer.
+  The simulator will be very nice, so don't expect every interview to be so pleasant. Run it multiple times
+  to practice different types of questions.
+  """)
 
 if st.session_state["started"] == False:
   industry = st.text_input("Industry", key="industry")
