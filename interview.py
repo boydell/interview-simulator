@@ -13,15 +13,18 @@ if 'generated' not in st.session_state:
 
 # Stuff to add:
 # * linkedIn links, twitter, etc?
-# * Instructions. Include advice for how to respond.
-# * industry, and jog title.
 # * Maybe include in the prompt, if it doesn't get enough detail, ask for more.
+# * If empty, no specific industry or job title
 
 def reset():
-  type = ("You are a hiring manager for a " + st.session_state['industry'] + 
-    " company, hiring a " + st.session_state['job-title'] + "." +
-    " Ask the candidate 6 questions, one at a time, and then ask the candidate if they have" +
-    " any questions for you. Make all the responses as concise as possible with a little humor expression.")
+  type = "You are a hiring manager"
+  if st.session_state['industry']:
+    type = type + " for a " + st.session_state['industry'] + " company"
+  if st.session_state['job-title']:
+    type = type + ", hiring a " + st.session_state['job-title']
+
+  type = type + """. Ask the candidate 6 questions, one at a time, and then ask the candidate if they have
+    any questions for you. Make all the responses as concise as possible with a little humor expression."""
   st.session_state['prompts'] = [{"role": "system", "content": type}]
   st.session_state['past'] = []
   st.session_state['generated'] = []
@@ -58,14 +61,15 @@ def chat_click():
     st.session_state['user'] = ""
 
 # ---- Now do the things
-
-# st.image("{Your logo}", width=80)
+st.set_page_config(page_title="Interview Simulator")
+st.image("sit-interview.png", width=120)
 st.title("Interview Simulator")
 st.markdown("""This is a tool to practice interviews. Every time you run it, the questions will be similar, 
   but different. It will ask five questions, then ask if you have any questions. Think seriously 
   how you would answer each question in a real interview, and the simulator will give feedback for each answer.
-  The simulator will be very nice, so don't actual interviews to be so pleasant. :) Run it multiple times
-  to practice different types of questions.
+  The simulator will be very nice, so don't expect actual interviews to be so pleasant. :smiley:
+
+  You can leave __Industry__ and __Job Title__ blank, which will result in generic interview questions.
   """)
 
 if st.session_state["started"] == False:
