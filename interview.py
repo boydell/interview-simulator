@@ -15,6 +15,7 @@ if 'generated' not in st.session_state:
 # * linkedIn links, twitter, etc?
 # * Maybe include in the prompt, if it doesn't get enough detail, ask for more.
 # * If empty, no specific industry or job title
+# * Privacy Policy
 
 def reset():
   type = "You are a hiring manager"
@@ -64,15 +65,17 @@ def chat_click():
 st.set_page_config(page_title="Interview Simulator")
 st.image("sit-interview.png", width=120)
 st.title("Interview Simulator")
-st.markdown("""This is a tool to practice interviews. Every time you run it, the questions will be similar, 
-  but different. It will ask five questions, then ask if you have any questions. Think seriously 
-  how you would answer each question in a real interview, and the simulator will give feedback for each answer.
-  The simulator will be very nice, so don't expect actual interviews to be so pleasant. :smiley:
-
-  You can leave __Industry__ and __Job Title__ blank, which will result in generic interview questions.
-  """)
 
 if st.session_state["started"] == False:
+  st.markdown("""This is a tool to practice interviews. Every time you run it, the questions will be similar, 
+    but different. It will ask five questions, then ask if you have any questions. Interview sessions are not
+    logged or save on the web server.
+    
+    Think seriously how you would answer each question in a real interview, and the simulator will give 
+    feedback for each answer. The simulator is very nice, so don't expect actual interviews to be so pleasant. :smiley:
+
+    You can leave __Industry__ and __Job Title__ blank, which will result in generic interview questions.
+    """)
   industry = st.text_input("Industry", key="industry")
   job_title = st.text_input("Job Title", key="job-title")
   start_button = st.button("Start", on_click=start_click)
