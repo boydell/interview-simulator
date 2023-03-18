@@ -1,6 +1,7 @@
 import os
 import openai
 import streamlit as st
+import streamlit.components.v1 as components
 from streamlit_chat import message
 from dotenv import load_dotenv
 
@@ -32,12 +33,16 @@ def reset():
 
 def generate_response(prompt):
   st.session_state['prompts'].append({"role": "user", "content": prompt})
-  completion=openai.ChatCompletion.create(
-    model="gpt-3.5-turbo",
-    messages = st.session_state['prompts']
-  )
+
+  try:
+    completion=openai.ChatCompletion.create(
+      model="gpt-3.5-turbo",
+      messages = st.session_state['prompts']
+    )
+    message=completion.choices[0].message.content
+  except:
+    message = "Whoops. I ran out of stuff to say. You might have to try again later."
   
-  message=completion.choices[0].message.content
   return message
 
 def start_click():
@@ -80,10 +85,12 @@ if st.session_state["started"] == False:
 else:
   st.markdown("If you like this tool, follow me on [LinkedIn](https://www.linkedin.com/in/boydellbown/) for updates.")
   end_button=st.button("Start Over", on_click=end_click)
+
+  if st.session_state['generated']:
+    # for i in range(len(st.session_state['generated'])-1, -1, -1):
+    for i in range(0, len(st.session_state['generated'])):
+      message(st.session_state['past'][i], is_user=True, key=str(i) + '_user')
+      message(st.session_state['generated'][i], key=str(i))
+
   user_input=st.text_area("You:", key="user")
   chat_button=st.button("Send", on_click=chat_click)
-
-if st.session_state['generated']:
-  for i in range(len(st.session_state['generated'])-1, -1, -1):
-    message(st.session_state['generated'][i], key=str(i))
-    message(st.session_state['past'][i], is_user=True, key=str(i) + '_user')
