@@ -13,7 +13,6 @@ if 'generated' not in st.session_state:
   st.session_state['generated'] = []
 
 # Stuff to add:
-# * switch the order
 # * Include the industry and job title on the chat page.
 
 def reset():
