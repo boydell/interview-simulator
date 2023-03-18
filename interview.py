@@ -12,10 +12,8 @@ if 'generated' not in st.session_state:
   st.session_state['generated'] = []
 
 # Stuff to add:
-# * linkedIn links, twitter, etc?
-# * Maybe include in the prompt, if it doesn't get enough detail, ask for more.
-# * If empty, no specific industry or job title
-# * Privacy Policy
+# * switch the order
+# * Include the industry and job title on the chat page.
 
 def reset():
   type = "You are a hiring manager"
@@ -67,19 +65,20 @@ st.image("sit-interview.png", width=120)
 st.title("Interview Simulator")
 
 if st.session_state["started"] == False:
-  st.markdown("""This is a tool to practice interviews. Every time you run it, the questions will be similar, 
-    but different. It will ask five questions, then ask if you have any questions. Interview sessions are not
-    logged or save on the web server.
-    
-    Think seriously how you would answer each question in a real interview, and the simulator will give 
-    feedback for each answer. The simulator is very nice, so don't expect actual interviews to be so pleasant. :smiley:
+  st.markdown("""Interviewing is hard! This is a tool to help you practice. It uses ChatGPT to ask five questions 
+  related to the industry and job title, then ask if you have any questions. Every session is different. Interview 
+  sessions are not logged or saved on the server.
+  
+  The questions are similar to a real interview, so use this to imagine your ideal responses. However, the simulator
+  is friendly and always responds in an upbeat way, so don't expect actual interviews to be so pleasant. :smiley:
 
-    You can leave __Industry__ and __Job Title__ blank, which will result in generic interview questions.
-    """)
+  You can leave the two fields, __Industry__ and __Job Title__, blank, which will result in generic interview questions.
+  """)
   industry = st.text_input("Industry", key="industry")
   job_title = st.text_input("Job Title", key="job-title")
   start_button = st.button("Start", on_click=start_click)
 else:
+  st.markdown("If you like this tool, follow me on [LinkedIn](https://www.linkedin.com/in/boydellbown/) for updates.")
   end_button=st.button("Start Over", on_click=end_click)
   user_input=st.text_area("You:", key="user")
   chat_button=st.button("Send", on_click=chat_click)
