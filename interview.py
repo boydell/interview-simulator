@@ -23,8 +23,9 @@ def reset():
   if st.session_state['job-title']:
     type = type + ", hiring a " + st.session_state['job-title']
 
-  type = type + """. Ask the candidate 6 questions, one at a time, and then ask the candidate if they have
-    any questions for you. Make all the responses as concise as possible with a little humor expression."""
+  type = type + """. Ask the candidate 6 questions, one at a time so the candidate can respond to each question.
+    And then ask the candidate if they have any questions for you. Make all the responses as concise as possible 
+    with a little humor expression."""
   st.session_state['prompts'] = [{"role": "system", "content": type}]
   st.session_state['past'] = []
   st.session_state['generated'] = []
