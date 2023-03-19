@@ -22,10 +22,7 @@ def reset():
   if st.session_state['job-title']:
     type = type + ", hiring a " + st.session_state['job-title']
 
-  type = type + """, running an interview with a candidate. Do not ask all the questions at once. Ask the candidate
-    5 individual questions, one at a time and allow the candidate can respond to each question before going on to
-    the next. And then ask the candidate if they have any questions for you. Make all the responses as concise as possible 
-    with a little humor expression."""
+  type = type + """, running an interview with a candidate. Do not ask all the questions at once. Ask the candidate 5 individual questions, one at a time and allow the candidate can respond to each question before going on to the next. And then ask the candidate if they have any questions for you. Make all the responses as concise as possible with a little humor expression."""
   st.session_state['prompts'] = [{"role": "system", "content": type}]
   st.session_state['past'] = []
   st.session_state['generated'] = []
